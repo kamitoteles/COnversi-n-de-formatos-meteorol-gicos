@@ -4,7 +4,9 @@
 import pandas as pd             # Version 1.0.5
 import numpy as np              # Version 1.19.0
 from datetime import datetime   # Version 4.3
-from os import path
+import os
+import fileinput
+import glob
 
 #// Ingreso de direccion de archivo de meteorologia formato RMCAB 2020 //////////////////////////#
 dir_meteorologia = ''
@@ -12,7 +14,7 @@ is_file = False
 while len(dir_meteorologia) < 1 or not is_file:
     dir_meteorologia = input('\nIngrese la direccion del archivo de meteorologia: ')
     
-    if path.isfile(dir_meteorologia):
+    if os.path.isfile(dir_meteorologia):
         is_file = True 
     else: 
          print('\n!!!ERROR: El archivo indicado no se encuentra')
@@ -31,7 +33,7 @@ is_dir = False
 while len(dir_samson) < 1 or not is_dir:
     dir_samson = input('\nIngrese la DIRECCION DE GUARDADO del archivo de meteorologia SMASON: ')
     
-    if path.isdir(dir_samson):
+    if os.path.isdir(dir_samson):
         is_dir = True
     else: 
          print('\n!!!ERROR: El directorio indicado no existe')
@@ -153,8 +155,22 @@ del archivo_meteorologia['00']
 #                  En caso de utilizar otra estacion, se debe cambiar en la variable 'title'
 #                  el codigo de la estacion, su nombre, y sus coordenadas
 #/////////////////////////////////////////////////////////////////////////////////////////////////#
-title = '~44444 KENNEDY           CO -5  N 4 39  W 74 5\n~YR MO DA HR I    1    2       3       4       5  6  7     8     9  10   11  12    13     14     15        16   17     18   19  20      21'
-np.savetxt(dir_samson + '/' + name_samson, archivo_meteorologia.values, fmt = ' %s', delimiter = '', header = title)
+np.savetxt('tepm_' + name_samson, archivo_meteorologia.values, fmt = ' %s', delimiter = '')
+
+title = '~44444 KENNEDY           CO -5  N 4 39  W 74 5\n~YR MO DA HR I    1    2       3       4       5  6  7     8     9  10   11  12    13     14     15        16   17     18   19  20      21\n'
+f= open('title.txt','w+')
+f.write(title)
+f.close()
+
+file_list = [ 'title.txt',  'tepm_' + name_samson]
+
+with open(dir_samson + '/' + name_samson, 'w') as file:
+    input_lines = fileinput.input(file_list)
+    file.writelines(input_lines)
+    
+os.remove('title.txt')
+os.remove('tepm_' + name_samson)
+
 
 #// Resumen de las direcciones de guardado ///////////////////////////////////////////////////////#
 print(f'\n====================================')
