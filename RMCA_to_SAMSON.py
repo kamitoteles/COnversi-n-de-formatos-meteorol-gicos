@@ -36,7 +36,7 @@ while len(dir_samson) < 1 or not is_dir:
     else: 
          print('\n!!!ERROR: El directorio indicado no existe')
 
-print('Espere...')
+print('\nEspere...')
 
 #// Lectura de archivo de meteorologia formato RMCAB 2020 ///////////////////////////////////////#    
 archivo_meteorologia = pd.read_excel(dir_meteorologia, headers = 3, 
