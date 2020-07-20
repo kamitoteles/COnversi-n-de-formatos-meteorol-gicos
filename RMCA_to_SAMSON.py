@@ -1,12 +1,11 @@
 ###  CONVERSION DE FORMATO DE ARCHIVOS DE METEOROLOGIA RMCAB 2020 A SAMSON
+### Autor: Camilo Moreno - cama9709@gmail.com
 
 #// Importacion de librerias ////////////////////////////////////////////////////////////////////#
 import pandas as pd             # Version 1.0.5
 import numpy as np              # Version 1.19.0
-from datetime import datetime   # Version 4.3
 import os
 import fileinput
-import glob
 
 #// Ingreso de direccion de archivo de meteorologia formato RMCAB 2020 //////////////////////////#
 dir_meteorologia = ''
