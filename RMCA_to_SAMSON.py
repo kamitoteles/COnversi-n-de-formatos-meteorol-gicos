@@ -1,4 +1,5 @@
 ###  RMCAB 2020 TO SAMSON CONVERSOR
+### Autor: Camilo Moreno - cama9709@gmail.com
 
 #// Library imports //////////////////////////////////////////////////////////////////////////////#
 import pandas as pd             # Version 1.0.5
