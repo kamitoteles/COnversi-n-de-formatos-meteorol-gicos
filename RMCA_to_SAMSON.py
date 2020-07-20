@@ -13,6 +13,7 @@ dir_meteorologia = ''
 is_file = False
 while len(dir_meteorologia) < 1 or not is_file:
     dir_meteorologia = input('\nEnter the RMCAB 2020 meteorology excel file: ')
+
     
     if os.path.isfile(dir_meteorologia):
         is_file = True 
@@ -23,6 +24,7 @@ while len(dir_meteorologia) < 1 or not is_file:
 name_samson = ''
 while len(name_samson) < 1:
     name_samson = input('\nEnter the name for the SAMSON file: ')
+
     
     if name_samson[-4:] != '.SAM':
         print('\n!!!ERROR: Te file neme must end with ".SAM"')
