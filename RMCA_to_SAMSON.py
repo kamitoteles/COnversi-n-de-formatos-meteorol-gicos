@@ -1,6 +1,6 @@
-###  CONVERSION DE FORMATO DE METEOROLOGIA RMCAB 2020 A SAMSON
+###  RMCAB 2020 TO SAMSON CONVERSOR
 
-#// Importacion de librerias ////////////////////////////////////////////////////////////////////#
+#// Library imports //////////////////////////////////////////////////////////////////////////////#
 import pandas as pd             # Version 1.0.5
 import numpy as np              # Version 1.19.0
 from datetime import datetime   # Version 4.3
@@ -8,44 +8,44 @@ import os
 import fileinput
 import glob
 
-#// Ingreso de direccion de archivo de meteorologia formato RMCAB 2020 //////////////////////////#
+#// User input of the RMCAB 2020 file //////////////////////////////// //////////////////////////#
 dir_meteorologia = ''
 is_file = False
 while len(dir_meteorologia) < 1 or not is_file:
-    dir_meteorologia = input('\nIngrese la direccion del archivo de meteorologia: ')
+    dir_meteorologia = input('\nEnter the RMCAB 2020 meteorology excel file: ')
     
     if os.path.isfile(dir_meteorologia):
         is_file = True 
     else: 
-         print('\n!!!ERROR: El archivo indicado no se encuentra')
+         print('\n!!!ERROR: File not found')
     
-#// Ingreso de nombre y direccion de destino del archivo de meteorologia formato SAMSON//////////#
+#// File name and location destiny set up for the SAMSON file ////////////////////////////////////#
 name_samson = ''
 while len(name_samson) < 1:
-    name_samson = input('\nElija el NOMBRE del archivo de meteorologia SMASON: ')
+    name_samson = input('\nEnter the name for the SAMSON file: ')
     
     if name_samson[-4:] != '.SAM':
-        print('\n!!!ERROR: La extension del nombre del archivo debe finalizar en ".SAM"')
+        print('\n!!!ERROR: Te file neme must end with ".SAM"')
         name_samson = ''
         
 dir_samson = ''
 is_dir = False
 while len(dir_samson) < 1 or not is_dir:
-    dir_samson = input('\nIngrese la DIRECCION DE GUARDADO del archivo de meteorologia SMASON: ')
+    dir_samson = input('\nEnter the directory where you want to save the SAMSON file: ')
     
     if os.path.isdir(dir_samson):
         is_dir = True
     else: 
-         print('\n!!!ERROR: El directorio indicado no existe')
+         print('\n!!!ERROR: The directory does not exist')
 
-print('\nEspere...')
+print('\nWAIT...')
 
-#// Lectura de archivo de meteorologia formato RMCAB 2020 ///////////////////////////////////////#    
+#// RMCAB 2020 file reading  ////////////////////////////////////////////////////////////////////#    
 archivo_meteorologia = pd.read_excel(dir_meteorologia, headers = 3, 
                                      dtype = str, skiprows = [0, 1, 2, 4],
                                      skipfooter = 11, na_values = '----')
 
-#// Reasignacion de nombre de variables meteorlogicas segun formato SAMSON //////////////////////# 
+#// File headers renaming ///////////////////////////////////////////////////////////////////////# 
 headers = [*archivo_meteorologia]
 for i in range(len(headers)):
     if headers[i] == 'Unnamed: 0':      headers[i] = '00'
@@ -61,7 +61,7 @@ for i in range(len(headers)):
 archivo_meteorologia.columns = headers
 del archivo_meteorologia['No']
 
-#// Funcion de actualizacion de espacios en blanco de los valores ///////////////////////////////#
+#// No data filling function ////////////////////////////////////////////////////////////////////#
 def actualizar_espacios(i, columna, campos, nada, extra = ''):
     
     if pd.isna(archivo_meteorologia[columna][i]):
@@ -71,7 +71,7 @@ def actualizar_espacios(i, columna, campos, nada, extra = ''):
         space = campos - len(archivo_meteorologia[columna][i])
         archivo_meteorologia[columna][i] = ' ' * space + temporary + extra
 
-#// Conversion de formato de valores ////////////////////////////////////////////////////////////#
+#// Format conversion  //////////////////////////////////////////////////////////////////////////#
 year = []; month = []; day = []; hour = []; flag = []; one = []
 two = []; four = []; five = []; six = []; seven = []; nine = []
 fourteen = []; fifteen = []; sixteen = []; eighteen = []; nineteen = []
@@ -150,18 +150,25 @@ new_headers = ['YR', 'MO', 'DA', 'HR', 'I'] + headers
 archivo_meteorologia = archivo_meteorologia[new_headers]
 del archivo_meteorologia['00']
 
-#// Creacion de archivo SAMSON ///////////////////////////////////////////////////////////////////#
-# !!!! IMPORTANTE: Se asume que se utilizara informacion de la estacion Kennedy.
-#                  En caso de utilizar otra estacion, se debe cambiar en la variable 'title'
-#                  el codigo de la estacion, su nombre, y sus coordenadas
+#// SAMSON file creation /////////////////////////////////////////////////////////////////////////#
+# !!!! IMPORTANT: It is set to default that the meteorology data proceeds from the Kennedy station
+#                 of the RMCAB.
+#
+#                 If you want to use another station, you must change the station_code,  
+#                 station_name and station_location variables listed below.
 #/////////////////////////////////////////////////////////////////////////////////////////////////#
 np.savetxt('tepm_' + name_samson, archivo_meteorologia.values, fmt = ' %s', delimiter = '')
 
-title = '~44444 KENNEDY           CO -5  N 4 39  W 74 5\n~YR MO DA HR I    1    2       3       4       5  6  7     8     9  10   11  12    13     14     15        16   17     18   19  20      21\n'
+#// Station variables to change /////////////////////////////////////////////////////////////////#
+station_code = '44444'
+station_name = 'KENNEDY'
+station_location = 'CO -5  N 4 39  W 74 5'
+
+title = f'~{station_code} {station_name}           {station_location}\n~YR MO DA HR I    1    2       3       4       5  6  7     8     9  10   11  12    13     14     15        16   17     18   19  20      21\n'
+
 f= open('title.txt','w+')
 f.write(title)
 f.close()
-
 file_list = [ 'title.txt',  'tepm_' + name_samson]
 
 with open(dir_samson + '/' + name_samson, 'w') as file:
@@ -172,9 +179,9 @@ os.remove('title.txt')
 os.remove('tepm_' + name_samson)
 
 
-#// Resumen de las direcciones de guardado ///////////////////////////////////////////////////////#
+#// Confirmation message ////////////////////////////////////////////////////////////////////////#
 print(f'\n====================================')
-print(f'==CONVERSION DE FORMATOS COMPLETA!==')
+print(f'=======CONVERSION COMPLETED!========')
 print(f'====================================')
-print(f'Archivo RMCAB: {dir_meteorologia}')
-print(f'Archivo SAMSON: {dir_samson + "/" + name_samson}')
+print(f'RMCAB File: {dir_meteorologia}')
+print(f'SAMSON File: {dir_samson + "/" + name_samson}')
