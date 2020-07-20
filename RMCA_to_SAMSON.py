@@ -1,4 +1,4 @@
-###  RMCAB 2020 TO SAMSON CONVERSOR
+###  CONVERSION DE FORMATO DE ARCHIVOS DE METEOROLOGIA RMCAB 2020 A SAMSON
 
 #// Library imports //////////////////////////////////////////////////////////////////////////////#
 import pandas as pd             # Version 1.0.5
