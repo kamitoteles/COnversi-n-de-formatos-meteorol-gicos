@@ -1,4 +1,4 @@
-# Meteorology data format conversors ddd
+# Meteorology data format conversors
 
 This respository contains various scripts that should be usefull in order to convert divere meteorology data formats.
 
