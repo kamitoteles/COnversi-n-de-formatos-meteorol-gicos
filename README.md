@@ -4,7 +4,7 @@ This respository contains various scripts that should be usefull in order to con
 
 ---
 ## RMCAB 2020 to SAMSON
-This first conversor is contained into the python script 'RMCA_to_SAMSON.py'. The code was developed on python 3.7 and all the libraries used are described in the commented code.
+This first conversor is contained into the python script 'RMCA_to_SAMSON.py'. The code was developed on python 3.7 and all the libraries used are described in the commented code. There are a spanish and an english version in the tags.
 
 The code is set to convert raw .xlsx meteorology data downloaded from the [Bogota Air Quality Monitoring Network](http://rmcab.ambientebogota.gov.co/Report/stationreport) (RMCA) to SAMSON text format.
 
