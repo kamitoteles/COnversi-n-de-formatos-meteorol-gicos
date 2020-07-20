@@ -36,7 +36,7 @@ while len(dir_samson) < 1 or not is_dir:
     if os.path.isdir(dir_samson):
         is_dir = True
     else: 
-         print('\n!!!ERROR: El directorio indicado no existe')
+         print('\n!!!ERROR: El directorio no existe')
 
 print('\nEspere...')
 
