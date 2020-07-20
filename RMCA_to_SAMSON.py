@@ -12,7 +12,7 @@ import glob
 dir_meteorologia = ''
 is_file = False
 while len(dir_meteorologia) < 1 or not is_file:
-    dir_meteorologia = input('\nIngrese la direccion del archivo de meteorologia: ')
+    dir_meteorologia = input('\nIngrese la direccion del archivo excel de la RMCAB: ')
     
     if os.path.isfile(dir_meteorologia):
         is_file = True 
@@ -22,7 +22,7 @@ while len(dir_meteorologia) < 1 or not is_file:
 #// Ingreso de nombre y direccion de destino del archivo de meteorologia formato SAMSON//////////#
 name_samson = ''
 while len(name_samson) < 1:
-    name_samson = input('\nElija el NOMBRE del archivo de meteorologia SMASON: ')
+    name_samson = input('\nElija el NOMBRE del archivo SMASON: ')
     
     if name_samson[-4:] != '.SAM':
         print('\n!!!ERROR: La extension del nombre del archivo debe finalizar en ".SAM"')
@@ -31,7 +31,7 @@ while len(name_samson) < 1:
 dir_samson = ''
 is_dir = False
 while len(dir_samson) < 1 or not is_dir:
-    dir_samson = input('\nIngrese la DIRECCION DE GUARDADO del archivo de meteorologia SMASON: ')
+    dir_samson = input('\nIngrese la DIRECCION DE GUARDADO del archivo convertido: ')
     
     if os.path.isdir(dir_samson):
         is_dir = True
@@ -151,13 +151,20 @@ archivo_meteorologia = archivo_meteorologia[new_headers]
 del archivo_meteorologia['00']
 
 #// Creacion de archivo SAMSON ///////////////////////////////////////////////////////////////////#
-# !!!! IMPORTANTE: Se asume que se utilizara informacion de la estacion Kennedy.
-#                  En caso de utilizar otra estacion, se debe cambiar en la variable 'title'
-#                  el codigo de la estacion, su nombre, y sus coordenadas
+# !!!! IMPORTANTE: Se asume que se utilizara informacion de la estacion Kennedy de la RMCAB.
+#                  En caso de utilizar otra estacion, se debe cambiar las variables de 
+#                  station_code, station_ name y station_location para que coincidan con la
+#                  estacion requerida.
 #/////////////////////////////////////////////////////////////////////////////////////////////////#
 np.savetxt('tepm_' + name_samson, archivo_meteorologia.values, fmt = ' %s', delimiter = '')
 
-title = '~44444 KENNEDY           CO -5  N 4 39  W 74 5\n~YR MO DA HR I    1    2       3       4       5  6  7     8     9  10   11  12    13     14     15        16   17     18   19  20      21\n'
+#// Variables de estacion a cambiar //////////////////////////////////////////////////////////////#
+station_code = '44444'
+station_name = 'KENNEDY'
+station_location = 'CO -5  N 4 39  W 74 5'
+
+title = f'~{station_code} {station_name}           {station_location}\n~YR MO DA HR I    1    2       3       4       5  6  7     8     9  10   11  12    13     14     15        16   17     18   19  20      21\n'
+
 f= open('title.txt','w+')
 f.write(title)
 f.close()
