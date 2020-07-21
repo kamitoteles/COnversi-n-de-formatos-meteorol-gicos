@@ -93,22 +93,6 @@ def rmcab2samson(dir_meteorologia: str, name_samson: str, dir_samson: str,
         else:
             hour.append(archivo_meteorologia['00'][i][11:13])
         
-        flag.append('0')
-        one.append('9999')
-        two.append('9999')
-        four.append('9999 ?0')
-        five.append('9999 ?0')
-        six.append(' 5')
-        seven.append(' 5')
-        nine.append('9999.')
-        fourteen.append('99999.')
-        fifteen.append('999999')
-        sixteen.append('999999999')
-        eighteen.append('99999.')
-        nineteen.append('9999')
-        twenty.append('999')
-        twentyone.append(' ' * 7)
-        
         actualizar_espacios(i, '03', 4, '9999 ?0', ' ?0')
         actualizar_espacios(i, '08', 5, '9999.')
         actualizar_espacios(i, '10', 3, '999')
@@ -117,20 +101,20 @@ def rmcab2samson(dir_meteorologia: str, name_samson: str, dir_samson: str,
         actualizar_espacios(i, '13', 5, '9999.')
         actualizar_espacios(i, '17', 4, '9999')
         
-    archivo_meteorologia['01'] = one
-    archivo_meteorologia['02'] = two
-    archivo_meteorologia['04'] = four
-    archivo_meteorologia['05'] = five
-    archivo_meteorologia['06'] = six
-    archivo_meteorologia['07'] = seven
-    archivo_meteorologia['09'] = nine
-    archivo_meteorologia['14'] = fourteen
-    archivo_meteorologia['15'] = fifteen
-    archivo_meteorologia['16'] = sixteen
-    archivo_meteorologia['18'] = eighteen
-    archivo_meteorologia['19'] = nineteen
-    archivo_meteorologia['20'] = twenty
-    archivo_meteorologia['21'] = twentyone
+    archivo_meteorologia['01'] = '9999'
+    archivo_meteorologia['02'] = '9999'
+    archivo_meteorologia['04'] = '9999 ?0'
+    archivo_meteorologia['05'] = '9999 ?0'
+    archivo_meteorologia['06'] = ' 5'
+    archivo_meteorologia['07'] = ' 5'
+    archivo_meteorologia['09'] = '9999.'
+    archivo_meteorologia['14'] = '99999.'
+    archivo_meteorologia['15'] = '999999'
+    archivo_meteorologia['16'] = '999999999'
+    archivo_meteorologia['18'] = '99999.'
+    archivo_meteorologia['19'] = '9999'
+    archivo_meteorologia['20'] = '999'
+    archivo_meteorologia['21'] = ' ' * 7
 
     headers = [*archivo_meteorologia]
     archivo_meteorologia.columns = headers
