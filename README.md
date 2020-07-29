@@ -1,4 +1,4 @@
-# Meteorology data format conversors
+# Conversores de formato de datos meteorológicos
 
 Este repositorio contiene herramientas de conversión de formatos de archivos de meteorología de fácil implementaión. La carpeta  `metconversor` contiene todas las implementaciones en formato de funciones de python. Los scripts que se encuentran fuera de dicha carpeta son implementaciones pensadas para ser corridas en un IDE.
 
