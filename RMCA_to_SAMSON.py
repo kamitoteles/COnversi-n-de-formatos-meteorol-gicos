@@ -50,7 +50,7 @@ while len(dir_samson) < 1 or not is_dir:
 print('\nEspere...')
 
 #// Lectura de archivo de meteorologia formato RMCAB 2020 ///////////////////////////////////////#    
-archivo_meteorologia = pd.read_excel(dir_meteorologia, headers = 3, 
+archivo_meteorologia = pd.read_excel(dir_meteorologia,
                                      dtype = str, skiprows = [0, 1, 2, 4],
                                      skipfooter = 11, na_values = '----')
 
