@@ -2,8 +2,8 @@
 ### Autor: Camilo Moreno - cama9709@gmail.com
 
 #// Importacion de librerias ////////////////////////////////////////////////////////////////////#
-import pandas as pd             # Version 1.0.5
-import numpy as np              # Version 1.19.0
+import pandas as pd             # Version 1.1.0
+import numpy as np              # Version 1.19.1
 import os
 import fileinput
 
