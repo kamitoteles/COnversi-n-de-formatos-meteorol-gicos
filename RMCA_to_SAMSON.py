@@ -52,7 +52,8 @@ print('\nEspere...')
 #// Lectura de archivo de meteorologia formato RMCAB 2020 ///////////////////////////////////////#    
 archivo_meteorologia = pd.read_excel(dir_meteorologia,
                                      dtype = str, skiprows = [0, 1, 2, 4],
-                                     skipfooter = 11, na_values = '----')
+                                     skipfooter = 11, na_values = '----',
+                                     )
 
 #// Reasignacion de nombre de variables meteorlogicas segun formato SAMSON //////////////////////# 
 headers = [*archivo_meteorologia]
@@ -72,13 +73,13 @@ del archivo_meteorologia['No']
 
 #// Funcion de actualizacion de espacios en blanco de los valores ///////////////////////////////#
 def actualizar_espacios(i, columna, campos, nada, extra = ''):
-    
-    if pd.isna(archivo_meteorologia[columna][i]):
-        archivo_meteorologia[columna][i] = nada
-    elif len(archivo_meteorologia[columna][i]) < campos:
-        temporary = archivo_meteorologia[columna][i]
-        space = campos - len(archivo_meteorologia[columna][i])
-        archivo_meteorologia[columna][i] = ' ' * space + temporary + extra
+    if 'columna' in archivo_meteorologia.columns:
+        if pd.isna(archivo_meteorologia[columna][i]):
+            archivo_meteorologia[columna][i] = nada
+        elif len(archivo_meteorologia[columna][i]) < campos:
+            temporary = archivo_meteorologia[columna][i]
+            space = campos - len(archivo_meteorologia[columna][i])
+            archivo_meteorologia[columna][i] = ' ' * space + temporary + extra
 
 #// Conversion de formato de valores ////////////////////////////////////////////////////////////#
 year = []; month = []; day = []; hour = []
