@@ -73,7 +73,7 @@ del archivo_meteorologia['No']
 
 #// Funcion de actualizacion de espacios en blanco de los valores ///////////////////////////////#
 def actualizar_espacios(i, columna, campos, nada, extra = ''):
-    if 'columna' in archivo_meteorologia.columns:
+    if columna in archivo_meteorologia.columns:
         if pd.isna(archivo_meteorologia[columna][i]):
             archivo_meteorologia[columna][i] = nada
         elif len(archivo_meteorologia[columna][i]) < campos:
