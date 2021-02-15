@@ -31,7 +31,7 @@ while len(dir_meteorologia) < 1 or not is_file:
 #// Ingreso de nombre y direccion de destino del archivo de meteorologia formato SAMSON//////////#
 name_samson = ''
 while len(name_samson) < 1:
-    name_samson = input('\nElija el NOMBRE del archivo SMASON: ')
+    name_samson = input('\nElija el NOMBRE del archivo SAMSON: ')
     
     if name_samson[-4:] != '.SAM':
         print('\n!!!ERROR: La extension del nombre del archivo debe finalizar en ".SAM"')
